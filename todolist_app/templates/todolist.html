@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" >  
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script> 
+    <link rel="stylesheet" href="{% static 'css/styl.css' %}">
+    
+</head>
+<body>
+    <center>
+        <div class="container-sm">
+            <div id="div2">
+                <h1>Todo List</h1>
+            <form action="" method="post">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <th>Item : </th>
+                        <td><input type="text" name="item" value=" "></td>
+                        <td><input type="submit" value="Submit" id="btn"></td>
+                    </tr>
+                    <tr>
+                        <th hidden>order</th>
+                        <td><input type="text" name="order" value="{{ order }}" hidden></td>
+                    </tr>
+                </table>
+            </form>
+            </div>
+        </div>
+    </center>
+        <div id="div3">
+            <br><br><br><br>
+            <table class="table table-bodered container table-primary" id="table">
+                <tr>
+                    <th>Order</th>
+                    <th>Item</th>
+                    <th>Drag and Drop</th>
+                    <th>Action</th>
+                </tr>
+                {% for i in view %}
+                    <tr>
+                        <td>{{ i.order }}</td>
+                        <td>{{ i.item }}</td>
+                        <td ><a href="drag/{{ i.item_id }}"><button id="btn">Drag</button></a>
+                            <a href="drop/{{ i.item_id }}"><button id="btn">Drop</button></a></td>
+                        <td><a href="edit/{{ i.item_id }}"><button id="btn">Edit</button></a>
+                            <a href="delete/{{ i.item_id }}"><button id="btn">Delete</button></a></td>
+                    </tr>
+                {% endfor %}
+            </table>    
+        </div>
+</body>
+</html>
